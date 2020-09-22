@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="favicon/favicon.ico">        
+        <meta name="apple-mobile-web-app-title" content="Chalona Dashboard">
+        <meta name="application-name" content="Chalona Dashboard">
+        <meta name="theme-color" content="#263238">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Chalona Sales</title>
+        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/lib/mcustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/lib/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/lib/timesync.js"></script> 
+        <script src="js/lib/jquery-3.3.1.min.js"></script>
+        <script src="js/lib/typeahead.jquery.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/mCustomScrollbar.min.js"></script>
+        <script src="js/lib/ismobile.js"></script>
+        <script src="chalona-api.js"></script>
+        <script src="js/lib/jquery-ui.min.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/structure.js"></script>
+        <script src="js/consulta_cuenta.js"></script>
+
+    </head>
+    <body>
+
+        <div class="wrapper">
+
+            <!-- Page Content Holder -->
+            <div id="content" >
+            
+                <div id="enviroment"></div>
+                <!-- Cuerpo de Navegacion -->
+                <div style="position: fixed; width: 100%; padding-top: 15px; margin-top: -20px; margin-left: -20px;padding-left: 20px; margin-right: -20px;padding-right: 20px; z-index: 99;">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" id="cliente" class="form-control" disabled>
+                            </div> 
+                        </div>
+                        <div class="col-md-2 col-xs-2">
+
+                            <button class="btn btn-secondary" onclick="location.assign('ordenes.html')">
+                                <b><i class="fa fa-truck"></i> </b>
+                            </button>                             
+                        </div>
+                        <div class="col-md-2 col-xs-10">
+                            <button id="pagar" class="btn btn-success btn-block"><i class="fa fa-check"></i> Realizar Pago</button>
+                        </div> 
+
+                        <div class="col-xs-6" hidden>
+                            <button id="pagar" class="btn btn-success btn-block">Realizar Pago</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                <br>
+                <br>
+                <br class="visible-xs visible-sm">
+                <br class="visible-xs visible-sm">
+
+                <div class="table-responsive" style="border: 1px solid; border-color: #EEEEEE;">
+                    <table class="table" style="cursor: pointer;">
+                        <thead>
+                          <tr>
+                            <th>Documento</th>
+                            <th>Fecha FT.</th>
+                            <th style="text-align: right;">Días</th>
+                            <th style="text-align: right;">Balance</th>
+                          </tr>
+                        </thead>
+                        <tbody id="saldo">
+                            <tr>
+                                <td>$documento</td>
+                                <td dformat>$fecha</td>
+                                <td style="text-align: right;" iformat>$dias</td>
+                                <td style="text-align: right;" nformat>$balance</td>
+                                                   
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="font-weight: bold">
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;" >Total</td>
+                                <td style="text-align: right;" id="total" nformat>0</td>
+                                                   
+                            </tr>
+                        </tfoot>
+                    </table> 
+                </div>    
+
+
+            </div>
+       	</div>
+       
+
+        <div class="overlay"></div>
+
+    </body>
+
+</html>

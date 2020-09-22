@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="http://bandalux.chalonasoft.com/css/lib/bootstrap.min.css">
+
+  <!-- Bootstrap Js CDN -->
+  <script src="http://bandalux.chalonasoft.com/js/lib/bootstrap.min.js"></script>
+
+  <title></title>
+
+  <style type="text/css">
+    body{
+      font-family: Arial;
+    }
+    
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid;
+      border-color: #EEEEEE;
+    } 
+    
+    th{
+      text-align: left;
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-color: #EEEEEE;
+      padding: 10px;      
+      font-size: 14px;
+    }
+    
+    td{
+      padding-top: 5px;
+      padding-bottom: 5px; 
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 12px;
+      color: #424242;
+    }
+  </style>
+
+</head>
+<body>
+
+        <div class="header" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);" id="emb-email-header-container">
+        <!--[if (mso)|(IE)]><table align="center" class="header" cellpadding="0" cellspacing="0" role="presentation"><tr><td style="width: 600px"><![endif]-->
+          <div class="logo emb-logo-margin-box" style="font-size: 26px;line-height: 32px;Margin-top: 6px;Margin-bottom: 20px;color: #c3ced9;font-family: Roboto,Tahoma,sans-serif;Margin-left: 20px;Margin-right: 20px;" align="center">
+            <div class="logo-center" align="center" id="emb-email-header"><img style="display: block;height: auto;width: 100%;border: 0;max-width: 230px;" src="https://i1.createsend1.com/ei/j/D6/1E5/059/020837/csfinal/LogoFinalChalonaBlue.png" alt="" width="230"></div>
+          </div>
+        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+        </div>
+
+
+
+      <div class="layout one-col fixed-width" style="width: 100%;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+        <div class="layout__inner" style="border-collapse: collapse;display: table;width: 100%;background-color: #307fb0;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/j/D6/1E5/059/020837/csfinal/mosaic_wall.jpg);background-repeat: repeat;">
+        <!--[if (mso)|(IE)]><table align="center" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-fixed-width" style="background-color: #307fb0;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/j/D6/1E5/059/020837/csfinal/mosaic_wall.jpg);background-repeat: repeat;"><td style="width: 600px" class="w560"><![endif]-->
+
+        
+            <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;Margin-bottom: 24px;">
+      <div style="mso-line-height-rule: exactly;mso-text-raise: 4px;">
+        <h1 class="size-20" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #44a8c7;font-size: 28px;font-family: Cabin,Avenir,sans-serif;text-align: center;" lang="x-size-20"><strong><span style="color:#0055a5; ">$empresa_nombre</span></strong></h1>
+      </div>
+    </div>
+        
+
+        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+        </div>
+      </div>
+
+    <h2 style="color: #60666d;font-size: 13px;text-align: left;">
+    <br>
+    <span style="color:#44a8c7">Vendedor:</span>&nbsp;<strong>$vendedor</strong><br>
+    <br>
+    <span style="color:#44a8c7">Cliente:</span>&nbsp;<strong>$cliente</strong><br>
+    <br>
+    <span style="color:#44a8c7">Fecha:</span>&nbsp;<strong>$fecha</strong>
+    </h2>
+
+
+
+    <table class="table table-striped" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Cod</th>
+          <th>Descripción</th>
+          <th style="text-align:right">Cant</th>
+          <th style="text-align: right;">Precio</th>
+          <th style="text-align: right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(var i=0;i<detalle.length;i++){%>
+          
+          <tr>
+            <td><%=detalle[i].merc%></td>
+            <td><%=detalle[i].nombre%></td>
+            <td style="text-align:right"><%=detalle[i].cantidad%></td>
+            <td style="text-align:right"><%=util.nformat(detalle[i].precio)%></td>
+            <td style="text-align:right"><%=util.nformat(detalle[i].total)%></td>
+          </tr>
+        
+        <%}%>
+
+
+      </tbody>
+    </table>
+
+    <br>
+    <h2 style="color: #60666d;font-size: 13px;text-align: left;">
+      <span style="color:#44a8c7">Comentario:</span>&nbsp;<strong>$comentario</strong><br>
+      <br>
+    </h2>
+            <div>
+      <div style="mso-line-height-rule: exactly;mso-text-raise: 4px;">
+        <p class="size-30" style="Margin-top: 0;Margin-bottom: 20px;font-size: 20px;line-height: 34px;text-align: right;" lang="x-size-30"><span style="color:#44a8c7"><strong>Total Neto RD$ <%=util.nformat(total)%></strong></span></p>
+      </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="http://bandalux.chalonasoft.com/css/lib/bootstrap.min.css">
+
+  <!-- Bootstrap Js CDN -->
+  <script src="http://bandalux.chalonasoft.com/js/lib/bootstrap.min.js"></script>
+
+  <title></title>
+
+  <style type="text/css">
+    body{
+      font-family: Arial;
+    }
+    
+    .table{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid;
+      border-color: #EEEEEE;
+    } 
+
+    .tableBlue{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid;
+      border-color: #90CAF9;
+    }  
+
+    .tableGreen{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid;
+      border-color: #A5D6A7;
+    }      
+
+    .tableRed{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid;
+      border-color: #E53935;
+    }       
+    
+    th{
+      text-align: left;
+
+      padding: 10px;      
+      font-size: 14px;
+    }
+    
+    td{
+      padding-top: 5px;
+      padding-bottom: 5px; 
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 12px;
+      color: #424242;
+    }
+  </style>
+
+</head>
+<body>
+
+        <div class="header" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);" id="emb-email-header-container">
+        <!--[if (mso)|(IE)]><table align="center" class="header" cellpadding="0" cellspacing="0" role="presentation"><tr><td style="width: 600px"><![endif]-->
+          <div class="logo emb-logo-margin-box" style="font-size: 26px;line-height: 32px;Margin-top: 6px;Margin-bottom: 20px;color: #c3ced9;font-family: Roboto,Tahoma,sans-serif;Margin-left: 20px;Margin-right: 20px;" align="center">
+            <div class="logo-center" align="center" id="emb-email-header"><img style="display: block;height: auto;width: 100%;border: 0;max-width: 230px;" src="https://i1.createsend1.com/ei/j/D6/1E5/059/020837/csfinal/LogoFinalChalonaBlue.png" alt="" width="230"></div>
+          </div>
+        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+        </div>
+
+
+
+
+    
+    <h1 style="text-align: center;">Cuadre de Ruta</h1>
+
+    <div style="width: 100%">
+      <div style="width: 50%; float: left;">
+        <h2 style="font-size: 13px; text-align: left;">
+          <span style="color:#44a8c7">Vendedor:</span>&nbsp;<strong>$vendedor</strong>
+        </h2>        
+      </div>
+      <div style="width: 50%; float: right;">
+          <h2 style="font-size: 13px; text-align: right;">
+            <span style="color:#44a8c7;">Fecha:</span>&nbsp;<strong ><%=util.dformat(fecha)%></strong>
+          </h2>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <h3 style="color: #1976D2;">Operaciones en Ventas</h3>
+    <table class="tableBlue table-striped" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th style="text-align: right;">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%venta.forEach(function(x){%>
+          
+          <tr>
+            <td><span style="color: gray"><%=x.codigo%></span><b> | <%=x.nombre%></b> </td>
+            <td style="text-align:right"><%=util.nformat(x.valor)%></td>            
+          </tr>
+        
+        <%})%>
+
+
+      </tbody>
+      <tfoot>
+          <th style="text-align: right;">Totales: </th>
+          <th style="text-align: right;"><%=util.nformat(total_venta)%></th>
+      </tfoot>
+    </table>
+
+    <br>
+    <br>
+
+    <h3 style="color: #388E3C;">Operaciones en Cobros</h3>
+
+    <table class="tableGreen table-striped" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th style="text-align:right">Efectivo</th>
+          <th style="text-align:right">Cheque</th>
+          <th style="text-align:right">Transferencia</th>
+          <th style="text-align:right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%cobro.forEach(function(x){%>
+          
+          <tr>
+            <td><span style="color: gray"><%=x.codigo%></span><b> | <%=x.nombre%></b> </td>
+            <td style="text-align:right"><%=util.nformat(x.efectivo)%></td>
+            <td style="text-align:right"><%=util.nformat(x.cheque)%></td>
+            <td style="text-align:right"><%=util.nformat(x.transferencia)%></td>
+            <td style="text-align:right"><%=util.nformat(x.total)%></td>            
+          </tr>
+        
+        <%})%>
+      </tbody>
+      <tfoot>
+          <th style="text-align: right;">Totales: </th>
+          <th style="text-align: right;"><%=util.nformat(total_efectivo)%></th>
+          <th style="text-align: right;"><%=util.nformat(total_cheque)%></th>
+          <th style="text-align: right;"><%=util.nformat(total_transferencia)%></th>
+          <th style="text-align: right;"><%=util.nformat(total_cobrado)%></th>
+      </tfoot>      
+    </table>
+
+    <br>
+    <br>
+
+    <h3 style="color: #C62828;">Resumen de Efectividad</h3>
+
+    <table class="tableRed table-striped" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Status</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%resumen.forEach(function(x){%>
+          
+          <tr>
+            <td><span style="color: gray"><%=x.codigo%></span><b> | <%=x.nombre%></b> </td>
+            <td><%=x.visita%></td>
+            <td><%=x.nota||'-'%></td>
+          </tr>
+        
+        <%})%>
+
+
+      </tbody>
+    </table>    
+
+    <br>
+
+</body>
+</html>

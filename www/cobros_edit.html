@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/manifest.json">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="apple-mobile-web-app-title" content="Chalona Dashboard">
+        <meta name="application-name" content="Chalona Dashboard">
+        <meta name="theme-color" content="#263238">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Chalona Sales</title>
+
+        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/lib/mcustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/lib/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/lib/timesync.js"></script> 
+        <script src="js/lib/jquery-3.3.1.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/ismobile.js"></script>
+        <script src="js/lib/typeahead.jquery.min.js"></script>
+        <script src="js/lib/mCustomScrollbar.min.js"></script>
+        <script src="chalona-api.js"></script>
+        <script src="js/lib/jquery-ui.min.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/structure.js"></script>    
+        <script src="js/cobros_edit.js"></script>
+        
+    </head>
+    <body>
+
+        <div class="wrapper">
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <!-- Cuerpo de Navegacion -->
+                    <div class="pull-right">
+                        <span onclick="go_back()" style="cursor: pointer;">Cancelar</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                    	<div class="col-md-6">
+	                        <div class="form-group row">
+	                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">A nombre de</label>
+	                            <div class="col-md-9">
+									<input type="text" class="form-control" id="entidad" disabled>
+	                            </div>
+	                        </div>
+		                </div>
+                        <div class="col-md-2" hidden>
+	                        <div class="form-group" >
+                                <input type="text" class="form-control" name="numero" disabled style="font-size: 25px; text-align: center;">
+	                        </div>
+                        </div>	
+
+                        <div class="col-md-2" hidden>
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="fecha" style="font-size: 15px; text-align: center; color: darkcyan;">
+                            </div>
+                        </div>  
+                        
+                        <div class="col-md-4"></div>                     
+                    </div>
+                    
+                    <table class="table" style="cursor: pointer; border: 1px solid; border-color: #EEEEEE; width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Listado de facturas</th>
+                          </tr>
+                        </thead>
+                        <tbody id="detalle">
+                            <tr>
+                                <td>
+                                <span><b>Factura No.: </b><span>$documento</span></span>
+                                <br>
+                                <span><b>Días: </b><span iformat>$dias</span></span>
+                                <br>
+                                <span><b>Inicial: </b><span nformat>$inicial</span></span>
+                                <br>  
+                                <span><b>Balance: </b><span nformat>$balance</span></span>
+                                <br><br>
+                                <label style="margin-top: 7px;">Pagar: </label>
+                                <input type="number" value="$pagar" 
+                                style="width: 130px; text-align: right; float: right; color: #009688;"
+                                class="form-control pagar"
+                                >                                
+                                </td>
+                                                      
+                            </tr>
+                        </tbody>
+                    </table> 
+                    <br><br><br>
+
+                  <div class="navbar-fixed-bottom" style="margin-left: 20px; margin-right: 20px; padding-bottom: 10px; background: white; z-index: 997">                        
+                        
+                        <hr style="margin-top: 8px; margin-bottom: 8px;">
+                        
+                        <div class="row">
+                            <div class="col-md-4">                            
+                                <div class="pull-left">
+                                
+                                    <h5 style=" font-weight: bold; color: gray; font-size: 11px;">Total: 
+                                        <span id="total" style="color: #009688; font-size: 17px;">
+                                            0
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>                            
+                             
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <div class="pull-right">
+                                    <h5 onclick="$('#cobrosModal').modal()" style="cursor: pointer; color: darkgreen; font-size: 17px;">APLICAR</h5>
+                                </div>                            
+                            </div>                                               
+                                                 
+                                
+                        </div> 
+                  </div>                     
+
+            </div>
+       	</div>
+
+        <!-- Modal de Finalizacion-->
+        <div id="cobrosModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Efectivo</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="efectivo" style="text-align: right;">
+                            </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Transferencia</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" 
+                                name="transferencia" style="text-align: right;">
+                            </div>
+                        </div>   
+
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Referencia</label>
+                            <div class="col-md-9">
+                                <input type="text" name="referencia" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Cheque</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="cheque"  style="text-align: right;">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">No. Cheque</label>
+                            <div class="col-md-9">
+                                <input type="number" name="cknumero" class="form-control">
+                            </div>
+                        </div>                                                                                               
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Banco</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="banco">
+                                    <option value="">Elegir Banco...</option>
+                                    <option value="A. LA NAC.">A. LA NAC.</option>
+                                    <option value="BANCAMERICA">BANCAMERICA</option>
+                                    <option value="COOPERATIVA SAN JOSE">COOPERATIVA SAN JOSE</option>
+                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                    <option value="PROMERICA">PROMERICA</option>
+                                    <option value="ASOC.MOCANA">ASOC.MOCANA</option>
+                                    <option value="HBD">HBD</option>
+                                    <option value="ALAVER">ALAVER</option>
+                                    <option value="COOP. MAMONCITO">COOP. MAMONCITO</option>
+                                    <option value="BAN RESERVAS">BAN RESERVAS</option>
+                                    <option value="SCOTIABANK">SCOTIABANK</option>
+                                    <option value="LA NACIONAL">LA NACIONAL</option>
+                                    <option value="BANESCO">BANESCO</option>
+                                    <option value="COPPSANO">COPPSANO</option>
+                                    <option value="BHD">BHD</option>
+                                    <option value="BANCO ADEMI">BANCO ADEMI</option>
+                                    <option value="PROGRESO">PROGRESO</option>
+                                    <option value="COOP SAN JOSE">COOP SAN JOSE</option>
+                                    <option value="BANCO RESERVAS">BANCO RESERVAS</option>
+                                    <option value="ADEMI">ADEMI</option>
+                                    <option value="COOP. SAN JOSE">COOP. SAN JOSE</option>
+                                    <option value="BANCO CENTRAL REP. DOM.">BANCO CENTRAL REP. DOM.</option>
+                                    <option value="BANCO MULTIPLE LOPEZ">BANCO MULTIPLE LOPEZ</option>
+                                    <option value="BANRESERVAS">BANRESERVAS</option>
+                                    <option value="POPULAR">POPULAR</option>
+                                    <option value="CARIBE">CARIBE</option>
+                                    <option value="BANCO PROGRESO">BANCO PROGRESO</option>
+                                    <option value="BCO. CARIBE">BCO. CARIBE</option>
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="form-group row" hidden>
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Transferencia</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="transferencia">
+                            </div>
+                        </div>                                               
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Comentario</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" class="form-control" name="comentario" style="resize: none; height: 83px;"> </textarea>
+                            </div>
+                        </div>                        
+ 
+
+                        <div class="form-group row" >
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Restan</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" value="0" id="restan" style="text-align: right;" disabled>                      
+                            </div>
+                        </div>                       
+                                                                                               
+                    </div>                    
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6" hidden>
+                        <div class="form-group row">
+                            <label class="col-md-3" style="font-size: 11px; margin-top: 7px;">Documento</label>
+                            <div class="col-md-9">
+                                <select name="doc" class="form-control">
+                                  <option value='REC'>Recibo</option>
+                                  <option value='NCC'>Nota de Credito</option>
+                                </select>                                
+                            </div>
+                        </div>                        
+                    </div>
+
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <div class="pull-right">
+                    <button save class="btn btn-success" type="button" style="cursor: pointer;" onclick="grabar_recibo()">
+                        <i class="fa fa-check"></i> <b>Guardar</b>
+                    </button>
+                    <button class="btn btn-default" type="button" style="cursor: pointer;" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>        
+
+        <div class="overlay"></div>
+
+    </body>
+    <script type="text/javascript">
+        window.oncontextmenu = function() {
+            return false;
+        }    
+    </script>
+</html>

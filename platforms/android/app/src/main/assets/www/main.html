@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="favicon/favicon.ico">        
+        <meta name="apple-mobile-web-app-title" content="Chalona Dashboard">
+        <meta name="application-name" content="Chalona Dashboard">
+        <meta name="theme-color" content="#263238">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Chalona Sales</title>
+        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">        
+        <link rel="stylesheet" href="css/lib/mcustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/lib/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/lib/timesync.js"></script> 
+        <script src="js/lib/jquery-3.3.1.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/mCustomScrollbar.min.js"></script>
+        <script src="chalona-api.js"></script>
+        <script src="js/lib/jquery-ui.min.js"></script> 
+        <script src="js/data.js"></script>  
+        <script src="js/structure.js"></script>
+        <script src="js/main.js"></script>   
+    </head>
+    <body>
+
+
+        <div class="wrapper">
+            <div id="content">
+                
+                <div id="enviroment"></div>
+                <h3 style="text-align: center; color: #616161;">Bienvenid@ <span class="user_display"></span></h3>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-default btn-block" data-toggle="modal" id="btnMsr" data-target="#modalScr">
+                                    Solicitud de Credito
+                                </button>
+                                <br class="visible-xs visible-sm">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-default btn-block" onclick="location.assign('mis_ordenes.html')">
+                                    Mis Ordenes
+                                </button>
+                                <br class="visible-xs visible-sm">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success btn-block" onclick="location.assign('ordenes.html')">
+                                    Mi Ruta
+                                </button>
+                                <br class="visible-xs visible-sm">
+                            </div>                                                                                    
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+
+
+            <!-- Modal -->
+            <div id="modalScr" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" name="nombre">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <input type="text" class="form-control" name="telefono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Empresa</label>
+                                <input type="text" class="form-control" name="empresa">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Documento</label>
+                                <input type="text" class="form-control" name="documento">
+                            </div>
+                        </div>
+                    </div>                                        
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <input type="text" class="form-control" name="direccion">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Correo</label>
+                                <input type="text" class="form-control" name="correo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br class="visible-xs visible-sm">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Referencia 1</label>
+                                <input type="text" class="form-control" placeholder="Nombre" name="referencia1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <br class="hidden-xs hidden-sm">
+                            <input type="text" class="form-control" placeholder="Teléfono" name="referencia1tel" style="margin-top: 5px;">
+                        </div>
+                    </div>
+
+                    <hr class="visible-xs visible-sm" style="margin-top: 5px; margin-bottom: 5px;">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Referencia 2</label>
+                                <input type="text" class="form-control" placeholder="Nombre" name="referencia2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <br class="hidden-xs hidden-sm">
+                            <input type="text" class="form-control" placeholder="Teléfono" name="referencia2tel" style="margin-top: 5px;">
+                        </div>
+                    </div>
+
+                    <hr class="visible-xs visible-sm" style="margin-top: 5px; margin-bottom: 5px;">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Referencia 3</label>
+                                <input type="text" class="form-control" placeholder="Nombre" name="referencia3">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <br class="hidden-xs hidden-sm">
+                            <input type="text" class="form-control" placeholder="Teléfono" name="referencia3tel" style="margin-top: 5px;">
+                        </div>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" style="width: 125px;" save><i class="fa fa-send"></i> Enviar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            
+        </div>
+
+
+        <div class="overlay"></div>
+
+
+    </body>
+    
+</html>

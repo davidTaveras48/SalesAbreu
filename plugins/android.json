@@ -1,0 +1,21 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.chalonasoft.abreu"
+    },
+    "cordova-plugin-printer": {
+      "PACKAGE_NAME": "com.chalonasoft.abreu"
+    },
+    "cordova-plugin-cleartext": {
+      "PACKAGE_NAME": "com.chalonasoft.abreu"
+    }
+  },
+  "dependent_plugins": {}
+}

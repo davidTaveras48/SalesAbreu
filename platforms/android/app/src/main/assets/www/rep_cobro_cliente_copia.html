@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="js/lib/jquery-3.3.1.min.js"></script>
+	<script src="chalona-api.js"></script>
+	<script src="js/data.js"></script>	
+	<script src="cordova.js"></script>
+	<title>Chalona Software</title>
+</head>
+
+
+<style type="text/css">
+
+	#printable { display: none; }
+
+	@media print
+	{
+		#non-printable { display: none; }
+	    #printable { display: block; }
+	}
+
+
+	.textSinBottom{
+		margin-bottom: -18px;
+	}
+	th{ 
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		padding: 5px;
+		padding-left: 0px;
+		padding-right: 0px;		
+	}	
+	table{
+		width: 100%;
+		border-collapse: collapse;
+	}
+	td{
+		padding-top: 8px;
+		padding-bottom: 5px;
+	}
+
+</style>
+<body style="background: white; width: 58mm; font-family: Arial;">
+
+<div id="non-printable">
+
+	<br><br><br>
+	<h1>Imprimiendo...</h1>
+
+</div>	
+
+
+<div id="printable">
+	<div style="font-family: Arial;">
+
+		<div style="margin-top: 10px; margin-bottom: 15px;">
+			<div style="text-align: center;">
+				<span>-----COMIENZA AQUI------------</span>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>			
+
+
+		<div style="width: 100%">
+			<img src="img/main_logo.png" style="width: 170px;">
+			<div style="font-size: 13px; margin-top: 5px;">
+                <span>AV. DUARTE #437 CASI ESQUINA OVANDO</span>
+                <br>
+                <span>ENS. LUPERON SANTO DOMINGO (DN), REP. DOM.</span>
+                <br>
+                <span>RNC: 130845115</span>
+                <br>
+                <span>Tel: 809-681-3610</span>
+			</div>
+		</div>
+
+		<div style="width: 100%">
+			<div style="font-size: 13px; margin-top: 10px;">
+				<span>Recibo No. <span id="numero"></span></span>
+				<br>
+				<span>Fecha: <span id="fecha"></span></span>
+				<br><br>
+				<span>
+					<span id="cliente"></span>
+					<span> - </span>
+					<span id="nombre"></span>
+				</span>
+				<br><br>
+				
+			</div>
+		</div>	
+
+		<div style="width: 100%">
+			<div style="font-size: 13px; margin-top: 10px;">
+				
+				<hr>
+				<div id="detalle">
+					<div>
+						<h4 style="font-weight: bold; margin-bottom: -10px; margin-top: 8px; ">$documento</h4>
+						<br>	
+						<span style="text-align: justify;" dformat >$fecha_factura</span>
+						<span style="float: right; ">
+							RD$ <span nformat>$valor</span>
+						</span>
+						
+						<br>
+						<br>					
+					</div>						
+				</div>				
+				<hr>
+
+			</div>
+		</div>	
+
+		<div style="font-size: 13px; margin-top: 10px;">
+
+                <div style="width: 100%;">
+                        <div style="width: 40%; float: left;">
+                                <span style="float: left;">V. Efectivo</span>
+                        </div>
+                        <div style="width: 60%;  float: right;">
+                                <span style="float: right; font-weight: bold;" id="efectivo"></span>
+                        </div>
+                </div>
+                <div style="width: 100%;">
+                        <div style="width: 40%; float: left;">
+                                <span style="float: left;">V. Cheque</span>
+                        </div>
+                        <div style="width: 60%; float: right;">
+                                <span style="float: right; font-weight: bold;" id="cheque"></span>
+                        </div>
+                </div>
+                <div style="width: 100%;">
+                        <div style="width: 50%; float: left;">
+                                <span style="float: left;">V. Transferencia</span>
+                        </div>
+                        <div style="width: 50%; float: right;">
+                                <span style="float: right; font-weight: bold;" id="transferencia"></span>
+                        </div>
+                </div>
+                <br>
+                <hr style="margin-top: 42px;" >
+                <div style="width: 100%;">
+                        <div style="width: 40%; float: left;">
+                                <span style="float: left; font-weight: bold;">Total Pagado</span>
+                        </div>
+                        <div style="width: 60%; float: right;">
+                                <span style="float: right; font-weight: bold;" id="total_pagado"></span>
+                        </div>
+                </div>
+
+        </div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<hr>
+
+		<div style="width: 100%">
+			<div style="font-size: 13px; margin-top: 10px;">
+
+				<span style="font-weight: bold; font-size: 11px;" id="vendedor"></span>
+				
+				<br>
+				<hr>
+				<br>
+				<span>Nota: <span id="comentario"></span></span>
+
+			</div>
+		</div>			
+
+		<br>
+		<br>
+		<br>
+		<br>		
+
+		<div style="margin-top: 10px; margin-bottom: 15px;">
+			<div style="text-align: center;">
+				<span>--------TERMINA AQUI------------</span>
+			</div>
+		</div>
+
+
+		<!-- -->
+
+		<!-- -->
+		<br><br>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	start(function(){
+		var args=go_data()
+		
+		var detalle=$('#detalle').repeat();
+
+	    db.request(`
+	    	select sales_saldo.documento,sales_cobrod.valor,sales_cobro.fecha,sales_saldo.fecha as fecha_factura,sales_cliente.codigo,sales_cliente.nombre,sales_cobro.numero
+	    		,efectivo,cheque,transferencia,efectivo+cheque+transferencia as total_pagado,comentario,login.nombre as vendedor
+	    	from sales_cobro inner join sales_cobrod on sales_cobro.id=cobro
+	    		inner join sales_saldo on sales_saldo.id=sales_cobrod.factura
+	    		inner join sales_cliente on sales_saldo.cliente=sales_cliente.codigo
+	    		inner join sales_usuario as login on login.id=sales_cliente.vendedor
+	    	where sales_cobro.id='${args.data.recibo}' 
+	    `)
+
+	    .then(function(r){
+	    	if(!r.length){
+	    		alert('sin data')
+	    		return 
+	    	}
+
+
+	    	var valor=0;
+	    	r.forEach(function(x){
+	    		valor+=parseFloat(x.total)
+	    	})
+	    	
+	    	$('#comentario').html(r[0].comentario)
+	    	$('#numero').html(r[0].numero)
+	    	$('#efectivo').html(util.nformat(r[0].efectivo))
+	    	$('#cheque').html(util.nformat(r[0].cheque))
+	    	$('#transferencia').html(util.nformat(r[0].transferencia))
+	    	$('#total_pagado').html('RD$ '+util.nformat(r[0].total_pagado))
+	    	$('#fecha').html(util.tformat(r[0].fecha))
+	    	$('#cliente').html(r[0].codigo)
+	    	$('#nombre').html(r[0].nombre)
+	    	$('#vendedor').html(r[0].vendedor)
+	    	//$('#numero').html(r[0].numero)
+	    	
+	    	detalle.append(r)
+			var page=$('#printable').html();
+			if(ready_para_imprimir){
+				cordova.plugins.printer.print(page, { duplex: 'none' }, function (res) {
+    				location.assign('cobros.html')
+				});
+			}else{
+				alert('no esta lista la impresion intentelo de nuevo')
+			}
+
+	    })
+		
+	})
+
+	
+	
+</script>
+</body>
+</html>

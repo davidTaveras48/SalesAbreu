@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/manifest.json">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="apple-mobile-web-app-title" content="Chalona Dashboard">
+        <meta name="application-name" content="Chalona Dashboard">
+        <meta name="theme-color" content="#263238">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Chalona Sales</title>
+
+        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/lib/mcustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/lib/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/lib/timesync.js"></script> 
+        <script src="js/lib/jquery-3.3.1.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/ismobile.js"></script>
+        <script src="js/lib/mCustomScrollbar.min.js"></script>
+        <script src="chalona-api.js"></script>
+        <script src="js/lib/jquery-ui.min.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/structure.js"></script>    
+        <script src="js/cobros.js"></script> 	
+
+    </head>
+    <body>
+
+        <div class="wrapper">
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <!-- Cuerpo de Navegacion -->
+                    <div id="enviroment"></div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" paramOf="b_cobros" name="search" placeholder="Buscar...">
+                                <span class="input-group-btn">
+                                    <button style="width: 60px;" data-toggle="modal" data-target="#filterBy" type="button" class="btn btn-default" disabled><i id="filterIco" class="fa fa-sliders"></i></button>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <br class="visible-xs visible-sm">
+
+                        <div class="col-md-4">  
+                            <div class="pull-left">
+                                <button class="btn btn-secondary" onclick="location.assign('ordenes.html')">
+                                    <b><i class="fa fa-truck"></i> </b>
+                                </button>                            
+                            </div>                                                
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="pull-right">
+                                <button class="btn btn-default btnSiRe" back-page="b_cobros">
+                                    <b><i class="fa fa-arrow-left"></i> Ant.</b>
+                                </button>
+                                <button class="btn btn-default btnSiRe"  next-page="b_cobros">
+                                    <b>Sig. <i class="fa fa-arrow-right"></i></b>
+                                </button>
+                            </div>
+                        </div>                           
+
+                    </div>
+                    <br>
+
+                    <table class="table table-hover" style="width: 100%; border: 1px solid; border-color: #EEEEEE; cursor: pointer;">
+                        <thead>
+                          <tr>
+                            <th>Listado de cobros</th>
+                          </tr>
+                        </thead>
+                        <tbody id="lista">
+                            <tr factura="$uid">
+                                <td>
+                                    <span style="color: darkslategray; ">$numero</span>
+                                    <br>
+                                    <span style="color: gray">$codigo</span><b> | $nombre</b> 
+                                    <br>
+                                    <span dformat style="font-weight: bold; color: gray;">$fecha</span>
+                                    <span style="float: right; font-weight: bold; color: #009688; font-size: 16px;">RD$ <span nformat>$valor</span></span>  
+                                </td>                                  
+                            </tr>
+                        </tbody>
+                    </table> 
+
+
+            </div>
+        </div>
+
+        <div class="overlay"></div>
+
+            <!-- Modal de detalle de orden-->
+            <div id="cobrosModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>FT</th>                                    
+                                    <th>Fecha</th>
+                                    <th style="text-align: right;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detalle">
+                                <tr>
+                                    <td>$factura</td>                                    
+                                    <td dformat>$fecha</td>
+                                    <td style="text-align: right;" nformat>$valor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-warning" onclick="imprimir()">Imprimir</button>
+                    </div>
+                    <div class="pull-right">   
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>    
+                    </div>
+                    
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <!-- Modal Filtro Por-->
+            <div id="filterBy" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                  <div class="modal-body">
+                    <h4>Filtro de Busqueda</h4><br>
+
+                    <div class="form-group row">
+                        <label class="col-md-3" style="margin-top: 7px"><b>Desde:</b></label>
+                        <div class="col-md-9">
+                            <input type="date" param="fecdes" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3" style="margin-top: 7px"><b>Hasta:</b></label>
+                        <div class="col-md-9">
+                            <input type="date" param="fechas" class="form-control">
+                        </div>
+                    </div>
+
+                 </div>
+                 <div class="modal-footer">
+                    <div class="pull-left" >
+                        <span class="filter-reset" hidden style="color: #C62828; cursor: pointer; font-size: 16px;">REINICIAR</span>
+                    </div>
+                    <span data-dismiss="modal" style="color: #1E88E5; cursor: pointer; font-size: 16px;">ACEPTAR</span>
+                 </div>
+                </div>
+
+              </div>
+            </div>               
+
+
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.windowTitle').html('Mis Cobros');
+            $('#miscobros').addClass("active");
+            $('[name=search]').focus()                        
+        })
+
+    </script>
+
+</html>

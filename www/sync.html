@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Chalona Sales</title>
+	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/lib/mcustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<script src="js/lib/timesync.js"></script>
+	<script src="js/lib/jquery-3.3.1.min.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
+	<script src="js/lib/mCustomScrollbar.min.js"></script>
+	<script src="chalona-api.js"></script>
+	<script src="js/lib/jquery-ui.min.js"></script>
+	<script src="js/data.js"></script>
+	<script src="js/sync.js"></script>
+</head>
+
+<style>
+	.lds-hourglass {
+		display: inline-block;
+		position: relative;
+		width: 64px;
+		height: 64px;
+	}
+
+	.lds-hourglass:after {
+		content: " ";
+		display: block;
+		border-radius: 50%;
+		width: 0;
+		height: 0;
+		margin: 6px;
+		background: #00695C;
+		box-sizing: border-box;
+		border: 26px solid #fff;
+		border-color: #fff transparent #fff transparent;
+		animation: lds-hourglass 1.2s infinite;
+	}
+
+	@keyframes lds-hourglass {
+		0% {
+			transform: rotate(0);
+			animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+		}
+
+		50% {
+			transform: rotate(900deg);
+			animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		}
+
+		100% {
+			transform: rotate(1800deg);
+		}
+	}
+</style>
+
+<body>
+	<div class="wrapper">
+		<div id="content">
+			<div id="sync2" class="animated" hidden>
+				<br><br><br><br><br><br>
+				<div class="row">
+					<div class="col-xs-4"></div>
+					<div class="col-xs-4">
+						<div class='visible-xs visible-sm loader a'>
+							<div class="lds-hourglass"></div>
+						</div>
+						<div class='hidden-xs hidden-sm loader b' style="margin-left:50px;">
+							<div class="lds-hourglass"></div>
+						</div>
+
+						<br>
+
+					</div>
+				</div>
+				<br><br><br>
+				<div class="row">
+					<div class="col-md-4 col-xs-1"></div>
+					<div class="col-md-4 col-xs-10">
+
+						<h5 id="client_text" hidden style="font-size: 26px;">
+							<i class="fa fa-check-circle"></i> Clientes
+						</h5>
+						<br>
+						<h5 id="merc_text" hidden style="font-size: 26px;">
+							<i class="fa fa-check-circle"></i> Mercancias
+						</h5>
+						<br>
+						<!-- <h5 id="saldo_text" hidden style="font-size: 26px;">
+										<i class="fa fa-check-circle"></i> Saldos de clientes
+									</h5> -->
+
+					</div>
+				</div>
+			</div>
+
+			<div id="sync1" class="animated">
+				<br><br>
+				<h3 class="visible-xs visible-sm" style="color: #00695C; margin-left: 20px;"><i
+						class="fa fa-history"></i> Sincronización</h3>
+
+				<div class="row hidden-xs hidden-sm">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<h3 style="color: #00695C; margin-left: 20px;"><i class="fa fa-history"></i> Sincronización</h3>
+					</div>
+				</div>
+				<br><br><br><br>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div style="background: #F5F5F5; padding: 20px; border-radius: 5px; color: #00695C">
+							<div class="form-group" style="padding-top: 5px;">
+								<label>
+									<input type="checkbox" checked name="chcliente">
+									<span class="checkmark">Clientes</span>
+								</label>
+							</div>
+							<div class="form-group" style="padding-top: 5px;">
+								<label>
+									<input type="checkbox" checked name="chmerc">
+									<span class="checkmark">Mercancias</span>
+								</label>
+							</div>
+							<!-- <div class="form-group" style="padding-top: 5px;">
+							    <label>
+							        <input type="checkbox" checked name="chsaldo">
+							        <span class="checkmark">Saldos de Clientes</span>
+							    </label>    
+							</div> -->
+						</div>
+						<br><br>
+						<button class="btn btn-block" name="sync"
+							style="background: #00695C; border-radius: 0; color: white; font-weight: bolder;">Actualizar</button>
+						<br><br>
+						<h5 style="color: gray; text-align: center; cursor: pointer;" onclick="window.history.back()">
+							Volver</h5>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div id="sync3" class="animated" hidden>
+				<br><br>
+				<img class="center-block" src="img/list.png" style="width: 200px;">
+				<br><br><br>
+				<h2 style="text-align: center; color: #00695C; font-weight: bold;">EN HORA BUENA!</h2>
+				<h5 style="text-align: center; color: #00695C;">Estamos redireccionandote a la app, nueva vez.</h5>
+			</div>
+
+			<div id="fallo_sync1" class="animated" hidden>
+				<br><br>
+				<img class="center-block" src="img/error.png" style="width: 200px;">
+				<br><br><br>
+				<h4 style="text-align: center; color: #C62828; font-weight: bold;">HOUSTON, TENEMOS UN PROBLEMA!</h4>
+				<h6 style="text-align: center; color: #C62828;">Fallamos en la comunicación, con nuestros servidores
+				</h6>
+				<br><br>
+				<div class="row">
+					<div class="col-xs-6">
+						<button class="btn btn-default btn-block" onclick="location.reload()"><i
+								class="fa fa-history"></i> Sincronizar</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-default btn-block" onclick="location.assign('main.html')"><i
+								class="fa fa-circle"></i> Dashboard</button>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+</body>
+
+</html>

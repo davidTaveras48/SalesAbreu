@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon/favicon.ico">        
+    <meta name="apple-mobile-web-app-title" content="Chalona Sales">
+    <meta name="application-name" content="Chalona Sales">
+    <meta name="msapplication-TileColor" content="#b4b4b4">
+    <meta name="theme-color" content="#000000">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chalona Sales</title>
+    
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/lib/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/lib/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/lib/timesync.js"></script> 
+    <script src="js/lib/jquery-3.3.1.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/ismobile.js"></script>
+    <script src="js/lib/mCustomScrollbar.min.js"></script>
+    <script src="js/lib/socket.io.js"></script>
+    <script src="chalona-api.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/structure.js"></script>   
+    <script src="js/ordenes_edit.js"></script> 
+    <script src="js/lightbox.js"></script> 
+    <link rel="stylesheet" href="css/lightbox.css">
+</head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <div id="content">
+
+                    <div class="row">
+                        <div class="col-xs-6">  
+                            <div style="margin-top: 7px;" class="pull-left">
+                                <span onclick="location.assign('ordenes.html')" style="cursor: pointer;">Cancelar</span>          
+                            </div>                                                
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <button class="btn btn-default btnNavigation btnSiRe" back-page="b_merc">
+                                    <i class="fa fa-arrow-left"></i> <b>Ant.</b>
+                                </button>
+                                <button class="btn btn-default btnNavigation btnSiRe"  next-page="b_merc">
+                                    <b>Sig.</b> <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>                        
+                    </div>
+                    
+                    <br>
+                    
+                    <div class="row">    
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" paramOf="b_merc" name="search" placeholder="Buscar...">
+                                <span class="input-group-btn">
+                                    <button style="width: 60px;" data-toggle="modal" data-target="#filterBy" type="button" class="btn btn-default" disabled><i id="filterIco" class="fa fa-sliders"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    
+                    <div class="row">  
+
+                        <div class="col-xs-12">
+                            <div id="ver_resumen" hidden>
+                                <button class="btn btn-warning btn-block" onclick="ver_resumen()" >Ver Resumen</button>
+                                <br>                                
+                            </div>
+                            <div id="ver_todos" hidden>
+                                <button class="btn btn-default btn-block" onclick="ver_todas_merc()">Ver Todos</button>
+                                <br> 
+                            </div>                            
+                        </div>
+
+                   
+                    </div>
+
+                    <div id="detalle_movil" class="visible-xs visisble-sm">
+
+                        <div>
+                            <div>
+                                <div class="row" style="padding-bottom: 13px; padding-top: 13px;">
+                                    <div class="col-xs-4">
+                                        <a href="img/merc/img_test_chalona.jpg" data-lightbox="image-1">
+                                            <img src="img/merc/img_test_chalona.jpg" style="width: 90%; border: 1px solid; border-color: #E0E0E0; border-radius: 10px;">
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="col-xs-8" >
+                                        <span style="color: gray;">$codigo</span> | <span style="color: gray;">$referencia</span>
+                                        <br>
+                                        <div style="margin-top: 5px;">
+                                            <span style="font-weight: bold; font-size: 12px;">
+                                                $nombre <span style="color: #E65100;">-- $existe
+                                            </span>
+                                            </span>                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" >
+                                <div class="col-xs-7">
+                                    <div style="margin-top: 7px;">
+                                        <span style="color: #004D40;">
+                                            <b class="precio">
+                                                <span class="tipo_precio">$tipo_precio</span>
+                                                | RD$ <span class="precio_mostrar">$iprecio</span>
+                                            </b>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div class="form-group">
+                                        <input type="number" value="$cantidad" placeholder="0" 
+                                            class="form-control cantidad" min="0" style="text-align: right;"
+                                            onclick="this.select()">
+                                    </div>
+                                </div>                        
+                            </div>
+                            <hr style="margin-top: 3px; margin-bottom: 3px;">                            
+                        </div>                        
+                        
+                    </div>                                                     
+
+
+                    <div class="table-responsive hidden-xs hidden-sm" style="cursor: pointer;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Existe</th>
+                                    <th>Referencia</th>
+                                    <th style="text-align: right;">Precio</th>
+                                    <th style="text-align: right;">Total</th>
+                                    <th style="text-align: right;">Cant</th>                                
+                                </tr>
+                            </thead>
+                            <tbody style="cursor: pointer;" id="detalle">
+                                <tr codigo="${r[i].codigo}">
+                                    <td class="codigo">$codigo</td>
+                                    <td>$nombre</td>
+                                    <td class="existe">$existe</td>
+                                    <td class="referencia">$referencia</td>
+                                    <td class="precio" style="text-align: right;" nformat>$iprecio</td>
+                                    <td class="valor" style="text-align: right;" nformat>$valor</td>
+                                    <td>
+                                        <input type="number" value="$cantidad" placeholder="0" 
+                                            class="form-control cantidad" min="0" style="width: 90px; text-align: right; float: right;" onclick="this.select()">
+                                    </td>                                
+                                </tr>
+
+
+                            </tbody>
+                        </table>                    
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-6">                        
+                            <div style="margin-bottom: 10px;">
+                                <span style="font-weight: bold; margin-right: 9px;">A nombre de</span>
+                                <span id="nombre" style="color: gray; font-size: 15px; font-weight: bold"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <table class="table" style="border: 1px solid; border-color: #E0E0E0;">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal:</td>
+                                        <td style="text-align: right; font-weight: bold; font-size: 18px;" id="valor">
+                                            00.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Itbis:</td>
+                                        <td style="text-align: right; font-weight: bold; font-size: 18px; color:gray;" id="itbis">
+                                            00.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td id="total" style="text-align: right; font-weight: bold; font-size: 30px; color:#44a8c7">
+                                            00.00
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <hr style="margin-top: 10px;">
+
+
+
+                <div class="row">   
+                    <div class="col-md-6"></div>             
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-success btn-block" id="procesaOrdenBtn" onclick="procesando_orden()" disabled>
+                                    <b>PROCESAR ORDEN</b>
+                                </button>                                
+                            </div>                     
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+          
+
+                <!-- Modal Filtro Por-->
+                <div id="confirmSendOrdenModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                      <div class="modal-body">
+
+                        <div id="info_order">
+                            <h4>Chalona Sales</h4>
+                            <br>
+                            <span>Estas a punto de procesar una orden...
+                            <br><br>Tener en cuenta una vez procesada la misma sera dirigida a nuestro almacen para ser despachada, Gracias!</span>
+
+                            <hr>
+
+                          <div class="form-group">
+                            <textarea placeholder='Comentario' type="text" rows='5' class="form-control" name="comentario" 
+                            style="resize: none; height: 143px;"></textarea>
+                          </div>                        
+                           
+                        </div>
+                        <div id="info_order_processing" class='animated infinite rubberBand' hidden>
+                            <h4 style="text-align: center;">PROCESANDO</h4>
+                        </div>                        
+                     </div>
+                     <div class="modal-footer">
+                        <span style="color: #1E88E5; cursor: pointer; font-size: 16px; margin-right: 20px;" id="procesa_orden" onclick="guardar()">PROCESAR</span>
+                        <span data-dismiss="modal" style="color: gray; cursor: pointer; font-size: 16px;">VER RESUMEN</span>
+                     </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- Fin Modal -->
+
+
+
+
+          
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
