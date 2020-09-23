@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var x = localStorage.getItem('User')
     x=JSON.parse(x)
-    var version='4.0.2'
+    var version='20.09.22'
 
     var today = new Date();
     var yyyy = today.getFullYear();
@@ -10,6 +10,8 @@ $(document).ready(function () {
         $('.user_display').html(x.nombre) 
         $('.version_app').html(version)  
         $('.currentYear').html(yyyy)
+
+        
     }, 100);
 
     $('input[type=number]').attr('min',0).val(0).click(function () {
@@ -52,6 +54,8 @@ $(document).ready(function () {
                     $('#logoutConfirm').modal();
                 });
 
+                $('#content').css('background','#f5f5f5b8')
+
                 
             });
         </script>
@@ -60,12 +64,15 @@ $(document).ready(function () {
 
 	        <div id="dismiss">
 	            <i class="fa fa-arrow-left"></i>
-	        </div>
-
-            <div class="sidebar-header">
-                <p class="user_display" style="color: white; font-size: 12px; width: 145px;"></p>
-                <h3 style="color: white; font-size: 20px;">Chalona <br>Software</h3>
             </div>
+            
+            <img src="img/menuHeader.jpg" style="width: 100%;">
+
+            <div style="padding: 10px; margin-top: 10px;">
+                <span class="user_display" style="font-size: 20px; font-weight: 500;"></span>
+            </div>
+
+            <hr style="margin-top: 10px;">
 
 	        <ul class="list-unstyled components">
 	            <li id='main'>
@@ -74,8 +81,6 @@ $(document).ready(function () {
 	            <li id='ordenes'>
 	                <a href="ordenes.html"><i class="fa fa-truck"></i> Mi Ruta</a>
 	            </li>
-                
-                <hr style="margin-bottom: 5px; margin-top: 5px;">
 	            
                 <li id='misordenes'>
 	                <a href="mis_ordenes.html"><i class="fa fa-file-text-o"></i> Mis Ordenes</a>
@@ -85,21 +90,15 @@ $(document).ready(function () {
                 </li> -->
 	        </ul>
 
+            
             <hr style="margin-bottom: -3px;">
             <ul class="list-unstyled">
-                <p style="color: #9E9E9E;"><b>Opciones</b></p>
-                <p style="margin-top: -20px; font-size: 15px; color: #777777; ">sync:  <span id="fechasync">dd/mm/yyyy 00:00</span></p>
+                
                 <li>
-                    <a style="cursor: pointer;" onclick="$('#aboutModal').modal()"">| Acerca de</a>
+                    <a style="cursor: pointer;" onclick="$('#aboutModal').modal()"">acerca de</a>
                 </li>
                 <li>
-                    <a id="btn_sync" style="cursor: pointer; color: #00695C;"><i class="fa fa-history"></i> Sync</a>
-                </li> 
-            </ul>
-            <hr style="margin-bottom: -3px;">
-            <ul class="list-unstyled">
-                <li>
-                    <a id="logoutButton" style="cursor: pointer; color: #f0ad4e;"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                    <a id="logoutButton" style="cursor: pointer; color: #d43f3a;"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
                 </li>
             </ul>            
             <br>
@@ -118,7 +117,7 @@ $(document).ready(function () {
                     <p>Desea cerrar sesión?</p>
                   </div>
                   <div class="modal-footer">
-                    <a type="button" class="btn btn-success" data-dismiss="modal" onclick="logout()"><i class="fa fa-sign-out"></i> Aceptar</a>
+                    <a type="button" class="btn btn-danger" data-dismiss="modal" onclick="logout()" style="width: 130px; font-weight: 600;">Salir</a>
                     <a type="button" class="btn btn-default" data-dismiss="modal">Cancelar</a>
                   </div>
                 </div>
@@ -167,23 +166,26 @@ $(document).ready(function () {
 
     $(`
         <div id="navBarra" class="row" style="
-            background: #0aa4e4; /* For browsers that do not support gradients */
-            background: linear-gradient(to right, #00897B, #00695C); /* Standard syntax (must be last) */
+            background: #FAFAFA;
+            color: #424242;
             height: 60px; margin: -20px; ">
             
             <div class="col-xs-2" style="margin-top: 15px;">   
-                    <span id="sidebarCollapse" style="color: white; cursor: pointer; margin-left: 6px; font-size: 24px; ">  <i id="bars" class="fa fa-bars"> </i> </span>
+                    <span id="sidebarCollapse" style="cursor: pointer; margin-left: 6px; font-size: 24px; ">  <i id="bars" class="fa fa-bars"> </i> </span>
             </div>
 
             <div class="col-xs-8">
-                <h2 class="hidden-xs hidden-sm windowTitle animated pulse" style="color: white; text-align: center; margin-top: 15px;"></h2>
-                <h3 class="visible-sm windowTitle animated pulse" style="color: white; text-align: center;"></h3>
-                <h3 class="visible-xs windowTitle animated pulse" style="color: white; text-align: center; font-size: 22px;"></h3>                    
+                <h2 class="hidden-xs hidden-sm windowTitle" style="margin-top: 15px;"></h2>
+                <h3 class="visible-sm windowTitle" ></h3>
+                <h3 class="visible-xs windowTitle" style="font-size: 22px;"></h3>                    
             </div>            
 
-            <div class="col-xs-2 pull-right" style="margin-top: 20px;">   
-                    <span class="hidden-xs hidden-sm" style="color: white; font-size: 15px; float: right;">Versión <span class='version_app'></span></span>
-                    <span class="visible-sm" style="color: white; font-size: 15px; float: right;"><span class='version_app'></span></span>
+            <div class="col-xs-2 pull-right"> 
+                    <h3 class="sync visible-xs" style="color: #D81B60; float: right; font-size: 20px;">
+                        <i class="fa fa-circle"></i>
+                    </h3>   
+                    <span class="hidden-xs hidden-sm" style="margin-top: 20px; font-size: 15px; float: right;">Versión <span class='version_app'></span></span>
+                    <span class="visible-sm" style="font-size: 15px; float: right;"><span class='version_app'></span></span>
             </div>               
             
         </div>

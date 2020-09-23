@@ -62,7 +62,7 @@
                     <div class="col-md-4">  
                         <div class="pull-left">
                             <button class="btn btn-secondary" onclick="location.assign('main.html')">
-                                <b><i class="fa fa-home"></i> </b>
+                                <b><i class="fa fa-home" style="margin-right: 6px;"></i> inicio</b>
                             </button>                            
                         </div>                                                
                     </div>
@@ -103,7 +103,7 @@
                     </tbody>
                 </table>
 
-                <button class="btn btn-success btn-block" 
+                <button class="btn btn-warning btn-block" 
                         onclick="confirma_cierre()">
                     <b>REALIZAR CIERRE</b>
                 </button>                    
@@ -118,6 +118,9 @@
               		<div class="modal-body">	
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <!--<h3>FERRETERIA COLINAS DEL OZAMA (GREGORIO SALVADOR MEJIA SOTO)</h3>-->
+                        
+                        <img src="img/customer-support.png" style="width: 25%;" alt="">
+                        
                         <h3 id="dt_nombre"></h3>
                         <h4 style="color: #757575;" id="dt_codigo"></h4>
                         <br>
@@ -125,11 +128,7 @@
                             <div class="col-md-6">
                                 <h5 style="font-size: 15px; color: #1e88e5;"><a  id="dt_telefono"></a></h5>
                             </div>
-                            <div class="col-md-6">
-                                <h5 style="font-size: 15px; color: #bf360c;"><a  id="dt_email"></a></h5>
-                            </div>
                         </div>
-                        <hr style="margin-top: 1px;">
 
                         <h5 style="font-size: 18px; color: #757575;" id="dt_ubicacion"></h5>
 
@@ -142,9 +141,7 @@
                   			</div> -->
                             <br class="visible-xs visible-sm">
                             <div class="col-md-4">
-                                <button class="btn btn-primary btn-block" 
-                                onclick="go('ordenes_edit.html',cliente);"
-                                >Crear Orden</button>
+                                <button class="btn btn-secondary btn-block" onclick="go('ordenes_edit.html',cliente);" style ="font-weight: bold; font-size: 20px;">Crear Orden</button>
                             </div>                              
                             <br class="visible-xs visible-sm">
                             <!-- <div class="col-md-4">

@@ -685,7 +685,7 @@ function actualizar() {
 
   console.log("actualizando....");
   $("#sync2").show();
-  actualiza_ordenes()
+  return actualiza_ordenes()
     .then(function () {
       return actualiza_mercancias()
     })
@@ -705,8 +705,12 @@ function actualizar() {
 
 // if (localStorage.getItem("primera_carga")) {
 function recursivo_actualizar() {
+  //  prendelo aqui
+  $('.sync').css('color', '#D81B60');
   actualizar()
     .finally(function () {
+      //  apagalo aqui
+      $('.sync').css('color', '#66BB6A');
       setTimeout(recursivo_actualizar, 1000 * 30);
     });
 }

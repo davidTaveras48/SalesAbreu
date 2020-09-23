@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<script src="js/lib/jquery-3.3.1.min.js"></script>
 
 	<script src="chalona-api.js"></script>
-	<script src="js/data.js"></script>	
+	<script src="js/data.js"></script>
 	<script src="cordova.js"></script>
 
 	<title>Chalona Software</title>
@@ -12,188 +13,196 @@
 
 
 <style type="text/css">
+	#printable {
+		display: none;
+	}
 
-	#printable { display: none; }
+	@media print {
+		#non-printable {
+			display: none;
+		}
 
-	@media print
-	{
-		#non-printable { display: none; }
-	    #printable { display: block; }
+		#printable {
+			display: block;
+		}
 	}
 
 
-	.textSinBottom{
+	.textSinBottom {
 		margin-bottom: -18px;
 	}
-	th{ 
+
+	th {
 		border-top: 1px solid;
 		border-bottom: 1px solid;
 		padding: 5px;
 		padding-left: 0px;
-		padding-right: 0px;		
-	}	
-	table{
+		padding-right: 0px;
+	}
+
+	table {
 		width: 100%;
 		border-collapse: collapse;
 	}
-	td{
+
+	td {
 		padding-top: 8px;
 		padding-bottom: 5px;
 	}
-
 </style>
+
 <body style="background: white; width: 58mm; font-family: Arial;">
 
-<div id="non-printable">
+	<div id="non-printable">
 
-	<br><br><br>
-	<h1>Imprimiendo...</h1>
-
-</div>	
-
-
-<div id="printable">
-	<div style="font-family: Arial;">
-
-		<div style="margin-top: 10px; margin-bottom: 15px;">
-			<div style="text-align: center;">
-				<span>-----COMIENZA AQUI------------</span>
-			</div>
-		</div>
-
-		<br>
-		<br>
-		<br>
-		<br>			
-
-		<div style="width: 100%">
-			<img src="img/main_logo.png" style="width:130px;padding-left: 16px;">
-			<br><br>
-            <div style="font-size: 13px; margin-top: 5px;">
-                <span>AV. DUARTE #437 CASI ESQUINA OVANDO</span>
-                <br>
-                <span>ENS. LUPERON SANTO DOMINGO (DN), REP. DOM.</span>
-                <br>
-                <span>RNC: 130845115</span>
-                <br>
-                <span>Tel: 809-681-3610</span>
-            </div>
-		</div>
-
-		<div style="width: 100%">
-			<div style="font-size: 13px; margin-top: 10px;">
-				<span>Orden No. <span id="numero"></span></span>
-				<br>
-				<span>Fecha: <span id="fecha"></span></span>
-				<br><br>
-				<span>
-					<span id="cliente"></span>
-					<span> - </span>
-					<span id="nombre"></span>
-				</span>
-				<br><br>
-				
-			</div>
-		</div>	
-
-		<div style="width: 100%">
-			<div style="font-size: 13px; margin-top: 10px;">
-				
-				<hr>
-				<div id="detalle">
-					<div>
-						<span style="text-align: justify;">$descrip</span>
-						<span>- $referencia</span>
-						<br>
-						<span style="float: left;"><span>$cantidad</span> UND.</span>
-						<span style="float: right; font-weight: bold">
-							RD$ <span nformat>$total</span>
-						</span>
-						
-						<br>
-						<br>					
-					</div>						
-				</div>				
-				<hr>
-
-			</div>
-		</div>	
-
-		<div style="font-size: 13px; margin-top: 10px;">
-
-			<div style="width: 100%;">
-				<div style="width: 40%; float: left;">
-					<span style="float: right;">Total Bruto</span>
-				</div>
-				<div style="width: 60%;  float: right;">
-					<span style="float: right; font-weight: bold;" id="valor"></span>
-				</div>				
-			</div>
-			<div style="width: 100%;">
-				<div style="width: 40%; float: left;">
-					<span style="float: right;">ITBIS</span>
-				</div>
-				<div style="width: 60%; float: right;">
-					<span style="float: right; font-weight: bold;" id="itbis"></span>
-				</div>				
-			</div>
-			<div style="width: 100%;">
-				<div style="width: 40%; float: left;">
-					<span style="float: right;">Total Neto</span>
-				</div>
-				<div style="width: 60%; float: right;">
-					<span style="float: right; font-weight: bold;" id="total_gral"></span>
-				</div>				
-			</div>						
-			
-		</div>	
-		<br>
-		<br>
-		<br>
-		<hr>
-
-		<div style="width: 100%">
-			<div style="font-size: 13px; margin-top: 10px;">
-
-				<span style="font-weight: bold; font-size: 11px;" id="vendedor"></span>
-				
-				<br>
-				<hr>
-
-				<span>LOS PRECIOS ESTAN SUJETOS A CAMBIOS SIN PREVIO AVISO</span>
-
-			</div>
-		</div>			
-
-		<br>
-		<br>
-		<br>
-		<br>		
-
-		<div style="margin-top: 10px; margin-bottom: 15px;">
-			<div style="text-align: center;">
-				<span>--------TERMINA AQUI------------</span>
-			</div>
-		</div>
-
-
-		<!-- -->
-
-		<!-- -->
-		<br><br>
+		<br><br><br>
+		<h1>Imprimiendo...</h1>
 
 	</div>
-</div>
 
-<script type="text/javascript">
-	start(function(){
-		var args=go_data()
-		console.log(args)
-		var detalle=$('#detalle').repeat();
 
-	    db.request(`
+	<div id="printable">
+		<div style="font-family: Arial;">
+
+			<div style="margin-top: 10px; margin-bottom: 15px;">
+				<div style="text-align: center;">
+					<span>-----COMIENZA AQUI------------</span>
+				</div>
+			</div>
+
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div style="width: 100%">
+				<img src="img/main_logo.png" style="width:130px;padding-left: 16px;">
+				<br><br>
+				<div style="font-size: 13px; margin-top: 5px;">
+					<span>AV. DUARTE #437 CASI ESQUINA OVANDO</span>
+					<br>
+					<span>ENS. LUPERON SANTO DOMINGO (DN), REP. DOM.</span>
+					<br>
+					<span>RNC: 130845115</span>
+					<br>
+					<span>Tel: 809-681-3610</span>
+				</div>
+			</div>
+
+			<div style="width: 100%">
+				<div style="font-size: 13px; margin-top: 10px;">
+					<span>Orden No. <span id="numero"></span></span>
+					<br>
+					<span>Fecha: <span id="fecha"></span></span>
+					<br><br>
+					<span>
+						<span id="cliente"></span>
+						<span> - </span>
+						<span id="nombre"></span>
+					</span>
+					<br><br>
+
+				</div>
+			</div>
+
+			<div style="width: 100%">
+				<div style="font-size: 13px; margin-top: 10px;">
+
+					<hr>
+					<div id="detalle">
+						<div>
+							<span style="text-align: justify;">$descrip</span>
+							<span>- $referencia</span>
+							<br>
+							<span style="float: left;"><span>$cantidad</span> UND.</span>
+							<span style="float: right; font-weight: bold">
+								RD$ <span nformat>$total</span>
+							</span>
+
+							<br>
+							<br>
+						</div>
+					</div>
+					<hr>
+
+				</div>
+			</div>
+
+			<div style="font-size: 13px; margin-top: 10px;">
+
+				<div style="width: 100%;">
+					<div style="width: 40%; float: left;">
+						<span style="float: right;">Total Bruto</span>
+					</div>
+					<div style="width: 60%;  float: right;">
+						<span style="float: right; font-weight: bold;" id="valor"></span>
+					</div>
+				</div>
+				<div style="width: 100%;">
+					<div style="width: 40%; float: left;">
+						<span style="float: right;">ITBIS</span>
+					</div>
+					<div style="width: 60%; float: right;">
+						<span style="float: right; font-weight: bold;" id="itbis"></span>
+					</div>
+				</div>
+				<div style="width: 100%;">
+					<div style="width: 40%; float: left;">
+						<span style="float: right;">Total Neto</span>
+					</div>
+					<div style="width: 60%; float: right;">
+						<span style="float: right; font-weight: bold;" id="total_gral"></span>
+					</div>
+				</div>
+
+			</div>
+			<br>
+			<br>
+			<br>
+			<hr>
+
+			<div style="width: 100%">
+				<div style="font-size: 13px; margin-top: 10px;">
+
+					<span style="font-weight: bold; font-size: 11px;" id="vendedor"></span>
+
+					<br>
+					<hr>
+
+					<span>LOS PRECIOS ESTAN SUJETOS A CAMBIOS SIN PREVIO AVISO</span>
+
+				</div>
+			</div>
+
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div style="margin-top: 10px; margin-bottom: 15px;">
+				<div style="text-align: center;">
+					<span>--------TERMINA AQUI------------</span>
+				</div>
+			</div>
+
+
+			<!-- -->
+
+			<!-- -->
+			<br><br>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		start(function () {
+			var args = go_data()
+			console.log(args)
+			var detalle = $('#detalle').repeat();
+
+			db.request(`
 	    	select orden.fecha,cliente,cliente.nombre,vendedor.nombre as vendedor, orden.numero,
-	    		merc.codigo as referencia ,merc.nombre as descrip,cantidad,precio,cantidad*precio as total 
+	    		merc.codigo as referencia ,merc.nombre as descrip,cantidad,precio,cantidad*precio as total ,merc.itasa
 	    	from detalle inner join merc on merc.codigo=detalle.merc 
 	    		inner join orden on orden.id=detalle.orden
 	    		inner join sales_cliente as cliente on cliente.codigo=orden.cliente
@@ -201,43 +210,46 @@
 	    	where orden='${args.data.orden}'
 	    `)
 
-	    .then(function(r){
-	    	if(!r.length){
-	    		alert('sin data')
-	    		return 
-	    	}
+				.then(function (r) {
+					if (!r.length) {
+						alert('sin data')
+						return
+					}
 
 
-	    	var valor=0;
-	    	r.forEach(function(x){
-	    		valor+=parseFloat(x.total)
-	    	})
-	    	$('#valor').html(util.nformat(valor))
-	    	$('#itbis').html(util.nformat(valor*.18))
-	    	$('#total_gral').html('RD$ '+util.nformat(valor*1.18))
-	    	$('#fecha').html(util.tformat(r[0].fecha))
-	    	$('#cliente').html(r[0].cliente)
-	    	$('#nombre').html(r[0].nombre)
-	    	$('#vendedor').html(r[0].vendedor)
-	    	$('#numero').html(r[0].numero)
-	    	detalle.append(r)
+					var valor = 0;
+					var itbis = 0;
+					r.forEach(function (x) {
+						valor += (parseFloat(x.total) / (1 + (x.itasa / 100)))
+						itbis += parseFloat(x.total) - (parseFloat(x.total) / (1 + (x.itasa / 100)))
+					})
+					$('#valor').html(util.nformat(valor))
+					$('#itbis').html(util.nformat(itbis))
+					$('#total_gral').html('RD$ ' + util.nformat(valor + itbis))
+					$('#fecha').html(util.tformat(r[0].fecha))
+					$('#cliente').html(r[0].cliente)
+					$('#nombre').html(r[0].nombre)
+					$('#vendedor').html(r[0].vendedor)
+					$('#numero').html(r[0].numero)
+					detalle.append(r)
 
-	    	var page=$('#printable').html();
-			if(ready_para_imprimir){
-				cordova.plugins.printer.print(page, { duplex: 'none' }, function (res) {
-			    	location.assign('ordenes.html')
-				});
-			}else{
-				alert('no esta lista la impresion intentelo de nuevo')
-			}
-	    })
-		
-	})
+					var page = $('#printable').html();
+					//window.print()
+					if (ready_para_imprimir) {
+						cordova.plugins.printer.print(page, { duplex: 'none' }, function (res) {
+							location.assign('ordenes.html')
+						});
+					} else {
+						alert('no esta lista la impresion intentelo de nuevo')
+					}
+				})
 
-	
+		})
 
-	
-</script>
+
+
+
+	</script>
 </body>
-</html>
 
+</html>

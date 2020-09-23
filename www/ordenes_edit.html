@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div style="margin-top: 7px;" class="pull-left">
-                        <span onclick="location.assign('ordenes.html')" style="cursor: pointer;">Cancelar</span>
+                        <span onclick="$('#cancelaPedidoModal').modal()" style="cursor: pointer; color: #d43f3a;">Cancelar Orden</span>
                     </div>
                 </div>
 
@@ -236,6 +236,27 @@
 
             <br>
 
+            <!-- Modal Cancelar Orden-->
+            <div id="cancelaPedidoModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-body">
+                        <h4 class="modal-title">Chalona Sales</h4>
+                        <br>
+                        <p>
+                            Ten en cuenta que si cancelas este pedido se perdera la informacion aqui dada.
+                            <br><br>
+                            Desea cancelar este pedido?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.assign('ordenes.html')" style="font-weight: 600;">Si, deseo cancelar</a>
+                        <a type="button" class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Modal Filtro Por-->
             <div id="confirmSendOrdenModal" class="modal fade" role="dialog">
@@ -251,13 +272,15 @@
                                 <br>
                                 <span>Estas a punto de procesar una orden...
                                     <br><br>Tener en cuenta una vez procesada la misma sera dirigida a nuestro almacen
-                                    para ser despachada, Gracias!</span>
+                                    para ser despachada,
+                                    <br> 
+                                    Gracias!</span>
 
                                 <hr>
 
                                 <div class="form-group">
                                     <textarea placeholder='Comentario' type="text" rows='5' class="form-control"
-                                        name="comentario" style="resize: none; height: 143px;"></textarea>
+                                        name="comentario" style="resize: none; height: 143px; border-radius: 10px;"></textarea>
                                 </div>
 
                             </div>
@@ -266,8 +289,13 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <span style="color: #1E88E5; cursor: pointer; font-size: 16px; margin-right: 20px;"
-                                id="procesa_orden" onclick="guardar()">PROCESAR</span>
+                            <span   style="   color: #62b85c;
+                                            cursor: pointer;
+                                            font-size: 16px;
+                                            margin-right: 20px;
+                                            font-weight: 600;"
+                                    id="procesa_orden" 
+                                    onclick="guardar()">PROCESAR</span>
                             <span data-dismiss="modal" style="color: gray; cursor: pointer; font-size: 16px;">VER
                                 RESUMEN</span>
                         </div>
