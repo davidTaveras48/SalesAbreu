@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var x = localStorage.getItem('User')
     x=JSON.parse(x)
-    var version='20.09.22'
+    var version='20.09.24'
 
     var today = new Date();
     var yyyy = today.getFullYear();

@@ -47,7 +47,7 @@
 <div id="non-printable">
 
 	<br><br><br>
-	<h1>Imprimiendo...</h1>
+	<h1 id="accionImprimir">Imprimiendo...</h1>
 
 </div>	
 
@@ -188,7 +188,17 @@
 <script type="text/javascript">
 	start(function(){
 		var args=go_data()
-		console.log(args)
+		if(!args){
+			setTimeout(() => {
+				$("#accionImprimir").html('La impresion no esta lista')
+				setTimeout(() => {
+					$("#accionImprimir").html('Redireccionando...')
+					setTimeout(() => {
+						location.assign('mis_ordenes.html')
+					}, 1000);
+				}, 1500);
+			}, 1000);
+		}
 		var detalle=$('#detalle').repeat();
 
 	    db.request(`
@@ -228,7 +238,16 @@
 			    	location.assign('mis_ordenes.html')
 				});
 			}else{
-				alert('no esta lista la impresion intentelo de nuevo')
+				setTimeout(() => {
+					$("#accionImprimir").html('La impresion no esta lista')
+					setTimeout(() => {
+						$("#accionImprimir").html('Redireccionando...')
+						setTimeout(() => {
+							location.assign('mis_ordenes.html')
+						}, 1000);
+					}, 1500);
+				}, 1000);
+				
 			}
 		})
 		
